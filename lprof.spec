@@ -1,7 +1,9 @@
-# TODO:
-# - optional KDE support (default off or second package)
-Summary:	lprof - a colour profile construction set library and sample profilers
-Summary(pl):	lprof - biblioteka i narzêdzia do konstruowania profili kolorów
+#
+# Conditional build:
+# _without_kde	- without KDE version of utilities
+#
+Summary:	lprof - a colour profile construction set library
+Summary(pl):	lprof - biblioteka do konstruowania profili kolorów
 Name:		lprof
 Version:	1.09
 Release:	1
@@ -14,7 +16,9 @@ Patch0:		%{name}-opt.patch
 Patch1:		%{name}-mrr.patch
 Patch2:		%{name}-targetsdir.patch
 Patch3:		%{name}-shared.patch
+Patch4:		%{name}-kde.patch
 URL:		http://www.littlecms.com/profilers.htm
+%{!?_without_kde:BuildRequires:	kdelibs-devel >= 3.0}
 BuildRequires:	lcms-devel >= 1.09
 BuildRequires:	libtool
 BuildRequires:	qt-devel >= 3.0
@@ -52,11 +56,23 @@ Static lprof library.
 %description static -l pl
 Statyczna biblioteka lprof.
 
+%package data
+Summary:	Colour profiling targets data
+Summary(pl):	Dane urz±dzeñ do profilowania kolorów
+Group:		Libraries
+
+%description data
+Colour profiling targets data.
+
+%description data -l pl
+Dane urz±dzeñ do profilowania kolorów.
+
 %package qt
 Summary:	Qt-based sample colour profilers
 Summary(pl):	Oparte na Qt przyk³adowe narzêdzia do profilowania kolorów
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{version}
+Requires:	%{name}-data = %{version}
 
 %description qt
 Qt-based sample colour profilers: qtMonitorProfiler,
@@ -67,31 +83,63 @@ Oparte na Qt przyk³adowe narzêdzia do profilowania kolorów:
 qtMonitorProfiler, qtScannerProfiler, qtMeasurementTool i
 qtProfileChecker. 
 
+%package kde
+Summary:	KDE-based sample colour profilers
+Summary(pl):	Oparte na KDE przyk³adowe narzêdzia do profilowania kolorów
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{version}
+Requires:	%{name}-data = %{version}
+
+%description kde
+KDE-based sample colour profilers: kMonitorProfiler, kScannerProfiler,
+kMeasurementTool and kProfileChecker.
+
+%description kde -l pl
+Oparte na KDE przyk³adowe narzêdzia do profilowania kolorów:
+kMonitorProfiler, kScannerProfiler, kMeasurementTool i
+kProfileChecker. 
+
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__make} all \
 	CC="%{__cc}" \
 	OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}" \
+	QTDIR=/usr
+
+%if 0%{!?_without_kde:1}
+for d in qt/qt[MPS]* ; do
+	%{__make} -C $d clean \
+		BINDIR=fake
+done
+
+%{__make} all \
+	CC="%{__cc}" \
+	OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}" \
 	QTDIR=/usr \
 	KDEDIR=/usr \
-	%{?_with_kde:USE_KDE=}
+	USE_KDE=y
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/lprof}
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	BINDIR=$RPM_BUILD_ROOT%{_bindir}
+%{__make} install -C src \
+	DESTDIR=$RPM_BUILD_ROOT
 
-install icc2it8 $RPM_BUILD_ROOT%{_bindir}
+install icc2it8 qt[mps]* $RPM_BUILD_ROOT%{_bindir}
 
-install -d $RPM_BUILD_ROOT%{_datadir}/lprof
+%if 0%{!?_without_kde:1}
+install k[mps]* $RPM_BUILD_ROOT%{_bindir}
+%endif
+
 cp -rf targets $RPM_BUILD_ROOT%{_datadir}/lprof
 
 %clean
@@ -116,7 +164,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/liblprof.a
 
+%files data
+%defattr(644,root,root,755)
+%{_datadir}/lprof
+
 %files qt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/qt*
-%{_datadir}/lprof
+
+%if 0%{!?_without_kde:1}
+%files kde
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/k*
+%endif
