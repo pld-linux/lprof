@@ -1,0 +1,95 @@
+--- lprof-1.09/ICCtoIT8/Makefile.orig	2003-07-01 22:03:23.000000000 +0200
++++ lprof-1.09/ICCtoIT8/Makefile	2003-07-01 22:16:36.000000000 +0200
+@@ -8,7 +8,7 @@
+ all:	icc2it8
+ 
+ icc2it8: icc2it8.o getopt.o
+-	$(CC) $(CFLAGS) icc2it8.o getopt.o ../src/liblprof.a -o $@ -lm -llcms
++	$(CC) $(CFLAGS) icc2it8.o getopt.o -L../src/.libs -L../src -llprof -o $@ -lm -llcms
+ 	-cp icc2it8 $(BINDIR)
+ 	-cp icc2it8.exe $(BINDIR)
+ 
+--- lprof-1.09/qt/qtMeasurementTool/makefile.orig	2003-07-01 22:03:23.000000000 +0200
++++ lprof-1.09/qt/qtMeasurementTool/makefile	2003-07-01 22:17:21.000000000 +0200
+@@ -18,7 +18,7 @@
+ 
+ # some settings
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt $(KDEINCLUDE)
+-LIBS     = -L$(QTDIR)/lib -L../../src $(KDELIBDIR)
++LIBS     = -L$(QTDIR)/lib -L../../src/.libs -L../../src $(KDELIBDIR)
+ CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+ POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
+ 
+--- lprof-1.09/qt/qtMonitorProfiler/Makefile.orig	2003-07-01 22:03:23.000000000 +0200
++++ lprof-1.09/qt/qtMonitorProfiler/Makefile	2003-07-01 22:17:36.000000000 +0200
+@@ -19,7 +19,7 @@
+ 
+ # some settings
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt  $(KDEINCLUDE)
+-LIBS     = -L$(QTDIR)/lib -L../../src $(KDELIBDIR)
++LIBS     = -L$(QTDIR)/lib -L../../src/.libs -L../../src $(KDELIBDIR)
+ CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+ POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
+ BINDIR   = ../../
+--- lprof-1.09/qt/qtProfileChecker/makefile.orig	2003-07-01 22:03:23.000000000 +0200
++++ lprof-1.09/qt/qtProfileChecker/makefile	2003-07-01 22:17:51.000000000 +0200
+@@ -19,7 +19,7 @@
+ 
+ # some settings
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt  $(KDEINCLUDE)
+-LIBS     = -L$(QTDIR)/lib -L../../src $(KDELIBDIR)
++LIBS     = -L$(QTDIR)/lib -L../../src/.libs -L../../src $(KDELIBDIR)
+ CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+ POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
+ BINDIR   = ../../
+--- lprof-1.09/qt/qtScannerProfiler/Makefile.orig	2003-07-01 22:03:23.000000000 +0200
++++ lprof-1.09/qt/qtScannerProfiler/Makefile	2003-07-01 22:18:04.000000000 +0200
+@@ -19,7 +19,7 @@
+ 
+ # some settings
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt  $(KDEINCLUDE)
+-LIBS     = -L$(QTDIR)/lib -L../../src $(KDELIBDIR)
++LIBS     = -L$(QTDIR)/lib -L../../src/.libs -L../../src $(KDELIBDIR)
+ CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+ POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
+ BINDIR   = ../../
+--- lprof-1.09/src/makefile.orig	2003-07-01 22:03:23.000000000 +0200
++++ lprof-1.09/src/makefile	2003-07-01 22:14:38.000000000 +0200
+@@ -7,23 +7,22 @@
+ INCDIR  = $(BASEDIR)/include
+ VERSION = 1.09
+ 
+-.c.o:	
+-	$(CC) $(CFLAGS) $(LDFLAGS) -c $<
++%.lo: %.c
++	libtool --mode=compile $(CC) $(CFLAGS) $(LDFLAGS) -c $<
+ 
+ SRCS = cmshull.c cmslm.c cmslnr.c cmsmatn.c cmsmkmsh.c cmsmntr.c cmsoutl.c \
+ 	 cmspcoll.c cmsprf.c cmsreg.c cmsscn.c cmssheet.c 
+ 
+-OBJS = $(SRCS:.c=.o)
++OBJS = $(SRCS:.c=.lo)
+ 
+-all:	liblprof.a 
++all:	liblprof.la 
+ 
+-liblprof.a: $(OBJS)
+-	ar -cru liblprof.a $(OBJS)
+-	ranlib liblprof.a
++liblprof.la: $(OBJS)
++	libtool --mode=link $(CC) -o liblprof.la $(OBJS) -rpath $(LIBDIR) -llcms -lm
+ 
+-install: liblprof.a  
++install: liblprof.la  
+ 	mkdir -p $(BINDIR) $(LIBDIR) $(INCDIR)	
+-	cp -a liblprof.a $(LIBDIR)
++	libtool --mode=install install liblprof.la $(LIBDIR)
+ 	cp ../include/lcmsprf.h $(INCDIR)
+ 	chmod 644 $(INCDIR)/lcmsprf.h
+ 	
+@@ -31,4 +30,4 @@
+ 	# we are doing nothing for the test target
+ 
+ clean:
+-	-rm $(OBJS) liblprof.a 
++	-rm $(OBJS) liblprof.la 

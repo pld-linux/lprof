@@ -1,0 +1,147 @@
+--- lprof-1.09/qt/qtMeasurementTool/qtmeasurementtooldialog.cpp.orig	2002-06-19 20:59:30.000000000 +0200
++++ lprof-1.09/qt/qtMeasurementTool/qtmeasurementtooldialog.cpp	2003-07-01 21:53:46.000000000 +0200
+@@ -402,6 +402,7 @@
+ {
+   QCanvasView::resizeEvent( e );
+   canvas()->resize(width()-4,height()-4);
++  MeasurementDialog.Reload();
+ }
+ 
+ void FigureEditor::contentsMousePressEvent(QMouseEvent* e)
+@@ -429,7 +430,7 @@
+ 
+     }
+     else
+-    if (e -> button() & Qt::RightButton) {
++    if (e -> state() & Qt::ShiftButton) {
+         
+             sizing = (GridItem*) *it;                   
+             contentsMouseMoveEvent(e);
+@@ -529,7 +530,7 @@
+ 
+     Canvas = new QCanvas(w-4, h-4); 
+     Canvas -> setAdvancePeriod(30);   
+-    FigEditor = new FigureEditor(*Canvas, CanvasFrame);
++    FigEditor = new FigureEditor(*this, *Canvas, CanvasFrame);
+     FigEditor -> clear();
+     //  FigEditor-> resize(w, h);
+     CanvasFrameLayout->addWidget(FigEditor);
+@@ -839,6 +840,12 @@
+ 
+ }
+ 
++void qtMeasurementToolDialog::Reload()
++{
++     TheImage -> Reload(fn, MonitorProfileSelector ->getFilename(),
++                                  InputProfileSelector->getFilename(),
++                                  Canvas);
++}
+ 
+ // ------------------------------------------------------------------------------ Slots
+ 
+@@ -910,7 +917,7 @@
+ 
+             } else
+             {
+-                Status->setText("Click & drag mouse to place the grid: Left - Move, Right - Size, Ctrl - UnShear. PICK when finished.");
++                Status->setText("Click & drag mouse to place the grid: Left - Move, Shift - Size, Ctrl - UnShear. PICK when finished.");
+                 PickBtn->show();                                        
+                 ProofToggle -> show();
+             }
+--- lprof-1.09/qt/qtMeasurementTool/qtmeasurementtooldialog.h.orig	2002-06-19 20:59:30.000000000 +0200
++++ lprof-1.09/qt/qtMeasurementTool/qtmeasurementtooldialog.h	2003-07-01 21:56:10.000000000 +0200
+@@ -148,6 +148,7 @@
+ };
+ 
+ 
++class qtMeasurementToolDialog;
+ 
+ // This class implements a visual dragger for pick templates
+ 
+@@ -157,7 +158,7 @@
+ 
+ public:
+ 
+-	FigureEditor(QCanvas& c, QWidget* parent=0, const char* name=0, WFlags f=0) : QCanvasView(&c,parent,name,f) {}    
++	FigureEditor(qtMeasurementToolDialog &measurement_dialog, QCanvas& c, QWidget* parent=0, const char* name=0, WFlags f=0) : QCanvasView(&c,parent,name,f), MeasurementDialog(measurement_dialog) {}    
+     void clear();
+     void resizeEvent( QResizeEvent* e );
+ protected:
+@@ -174,7 +175,7 @@
+ 	GridItem* sizing;
+ 	GridItem* unshearing;
+     QPoint moving_start;
+-	
++    qtMeasurementToolDialog &MeasurementDialog;
+ };
+ 
+ 
+@@ -201,7 +202,7 @@
+ 
+ 	BOOL LoadConfig();
+ 	void SaveConfig();
+-
++	void Reload();
+ 
+ 
+ public slots:
+--- lprof-1.09/qt/qtMeasurementTool/qtmeasurementtooldialogbase.ui.orig	2002-06-19 20:59:30.000000000 +0200
++++ lprof-1.09/qt/qtMeasurementTool/qtmeasurementtooldialogbase.ui	2003-07-01 21:56:51.000000000 +0200
+@@ -1674,7 +1674,7 @@
+                                         </property>
+                                         <property>
+                                             <name>FileMask</name>
+-                                            <string>*.itx</string>
++                                            <string>*.itx;*.ITX</string>
+                                         </property>
+                                         <property>
+                                             <name>Prompt</name>
+@@ -1861,7 +1861,7 @@
+                                         </property>
+                                         <property>
+                                             <name>FileMask</name>
+-                                            <string>*.icc; *.icm</string>
++                                            <string>*.icc; *.icm; *.ICC; *.ICM</string>
+                                         </property>
+                                         <property>
+                                             <name>Prompt</name>
+@@ -1925,7 +1925,7 @@
+                                         </property>
+                                         <property>
+                                             <name>FileMask</name>
+-                                            <string>*.icc;*.icm</string>
++                                            <string>*.icc;*.icm;*.ICC;*.ICM</string>
+                                         </property>
+                                         <property>
+                                             <name>Prompt</name>
+--- lprof-1.09/qt/qtMonitorProfiler/qtmonitorprofilerdialogbase.ui.orig	2002-06-19 20:59:55.000000000 +0200
++++ lprof-1.09/qt/qtMonitorProfiler/qtmonitorprofilerdialogbase.ui	2003-07-01 21:50:22.000000000 +0200
+@@ -1261,7 +1261,7 @@
+                                 </property>
+                                 <property>
+                                     <name>FileMask</name>
+-                                    <string>IT8/CGATS.5 files (*.it? *.cgs);;All files (*.*)</string>
++                                    <string>IT8/CGATS.5 files (*.it? *.cgs *.IT? *.CGS);;All files (*.*)</string>
+                                 </property>
+                                 <property>
+                                     <name>Prompt</name>
+@@ -1353,7 +1353,7 @@
+                                 </property>
+                                 <property>
+                                     <name>FileMask</name>
+-                                    <string>icc profiles (*.icc *.icm);;All files (*.*)</string>
++                                    <string>icc profiles (*.icc *.icm *.ICC *.ICM);;All files (*.*)</string>
+                                 </property>
+                                 <property>
+                                     <name>Prompt</name>
+--- lprof-1.09/qt/qtProfileChecker/qtprofilecheckerdialogbase.ui.orig	2002-06-19 20:59:40.000000000 +0200
++++ lprof-1.09/qt/qtProfileChecker/qtprofilecheckerdialogbase.ui	2003-07-01 21:49:35.000000000 +0200
+@@ -1432,7 +1432,7 @@
+                                 </property>
+                                 <property>
+                                     <name>FileMask</name>
+-                                    <string>*.icm;*.icc;*.pf</string>
++                                    <string>*.icm;*.icc;*.pf;*.ICM;*.ICC;*.PF</string>
+                                 </property>
+                                 <property>
+                                     <name>Prompt</name>

@@ -1,0 +1,22 @@
+--- lprof-1.09/qt/qtProfileChecker/qtprofilecheckerdialogbase.ui.orig	2003-07-01 22:00:08.000000000 +0200
++++ lprof-1.09/qt/qtProfileChecker/qtprofilecheckerdialogbase.ui	2003-07-01 22:01:50.000000000 +0200
+@@ -861,7 +861,7 @@
+                                         </property>
+                                         <property>
+                                             <name>Dir</name>
+-                                            <string>targets</string>
++                                            <string>/usr/share/lprof/targets</string>
+                                         </property>
+                                         <property>
+                                             <name>FileMask</name>
+--- lprof-1.09/qt/qtScannerProfiler/qtscannerprofilerdialogbase.ui.orig	2002-06-19 20:59:20.000000000 +0200
++++ lprof-1.09/qt/qtScannerProfiler/qtscannerprofilerdialogbase.ui	2003-07-01 22:02:01.000000000 +0200
+@@ -882,7 +882,7 @@
+                         </property>
+                         <property>
+                             <name>Dir</name>
+-                            <string>targets</string>
++                            <string>/usr/share/lprof/targets</string>
+                         </property>
+                         <property>
+                             <name>FileMask</name>
