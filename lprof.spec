@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# _without_kde	- without KDE version of utilities
+%bcond_without	kde	# without KDE version of utilities
 #
 Summary:	lprof - a colour profile construction set library
 Summary(pl):	lprof - biblioteka do konstruowania profili kolorów
@@ -19,7 +19,7 @@ Patch3:		%{name}-shared.patch
 Patch4:		%{name}-kde.patch
 Patch5:		%{name}-qtmt.patch
 URL:		http://www.littlecms.com/profilers.htm
-%{!?_without_kde:BuildRequires:	kdelibs-devel >= 3.0}
+%{?with_kde:BuildRequires:	kdelibs-devel >= 3.0}
 BuildRequires:	lcms-devel >= 1.09
 BuildRequires:	libtool
 BuildRequires:	qt-devel >= 3.0
@@ -115,7 +115,7 @@ kProfileChecker.
 	OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}" \
 	QTDIR=/usr
 
-%if 0%{!?_without_kde:1}
+%if %{with kde}
 for d in qt/qt[MPS]* ; do
 	%{__make} -C $d clean \
 		BINDIR=fake
@@ -138,7 +138,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/lprof}
 
 install icc2it8 qt[mps]* $RPM_BUILD_ROOT%{_bindir}
 
-%if 0%{!?_without_kde:1}
+%if %{with kde}
 install k[mps]* $RPM_BUILD_ROOT%{_bindir}
 %endif
 
@@ -174,7 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/qt*
 
-%if 0%{!?_without_kde:1}
+%if %{with kde}
 %files kde
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/k*
