@@ -1,0 +1,48 @@
+diff -Nur lprof-1.09.orig/qt/qtMeasurementTool/makefile lprof-1.09/qt/qtMeasurementTool/makefile
+--- lprof-1.09.orig/qt/qtMeasurementTool/makefile	2003-09-07 15:09:52.000000000 +0200
++++ lprof-1.09/qt/qtMeasurementTool/makefile	2003-09-07 15:10:59.186942992 +0200
+@@ -20,7 +20,7 @@
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt $(KDEINCLUDE)
+ LIBS     = -L$(QTDIR)/lib -L../../src/.libs -L../../src $(KDELIBDIR)
+ CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+-POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
++POSTLIB  = $(KDEPOSTLIB) -lqt-mt -llprof -llcms -lm
+ 
+ BINDIR   = ../../
+ OBJECTS=main.o qtlcmswidgets.o qtmeasurementtooldialog.o qtmeasurementtooldialogbase.o moc_qtmeasurementtooldialog.o moc_qtmeasurementtooldialogbase.o moc_qtlcmswidgets.o
+diff -Nur lprof-1.09.orig/qt/qtMonitorProfiler/Makefile lprof-1.09/qt/qtMonitorProfiler/Makefile
+--- lprof-1.09.orig/qt/qtMonitorProfiler/Makefile	2003-09-07 15:09:52.000000000 +0200
++++ lprof-1.09/qt/qtMonitorProfiler/Makefile	2003-09-07 15:10:54.046724424 +0200
+@@ -21,7 +21,7 @@
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt  $(KDEINCLUDE)
+ LIBS     = -L$(QTDIR)/lib -L../../src/.libs -L../../src $(KDELIBDIR)
+ CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+-POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
++POSTLIB  = $(KDEPOSTLIB) -lqt-mt -llprof -llcms -lm
+ BINDIR   = ../../
+ OBJECTS=main.o qtlcmswidgets.o qtmonitorprofilerdialog.o qtmonitorprofilerdialogbase.o moc_qtmonitorprofilerdialog.o moc_qtmonitorprofilerdialogbase.o moc_qtlcmswidgets.o
+ 
+diff -Nur lprof-1.09.orig/qt/qtProfileChecker/makefile lprof-1.09/qt/qtProfileChecker/makefile
+--- lprof-1.09.orig/qt/qtProfileChecker/makefile	2003-09-07 15:09:52.000000000 +0200
++++ lprof-1.09/qt/qtProfileChecker/makefile	2003-09-07 15:10:14.565726448 +0200
+@@ -21,7 +21,7 @@
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt  $(KDEINCLUDE)
+ LIBS     = -L$(QTDIR)/lib -L../../src/.libs -L../../src $(KDELIBDIR)
+ CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+-POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
++POSTLIB  = $(KDEPOSTLIB) -lqt-mt -llprof -llcms -lm
+ BINDIR   = ../../
+ OBJECTS=main.o qtdrawcurve.o qtcietonge.o qtlcmswidgets.o qtprofilecheckerdialog.o qtprofilecheckerdialogbase.o moc_qtprofilecheckerdialog.o moc_qtprofilecheckerdialogbase.o moc_qtlcmswidgets.o
+ 
+diff -Nur lprof-1.09.orig/qt/qtScannerProfiler/Makefile lprof-1.09/qt/qtScannerProfiler/Makefile
+--- lprof-1.09.orig/qt/qtScannerProfiler/Makefile	2003-09-07 15:09:52.000000000 +0200
++++ lprof-1.09/qt/qtScannerProfiler/Makefile	2003-09-07 15:10:10.243383544 +0200
+@@ -21,7 +21,7 @@
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt  $(KDEINCLUDE)
+ LIBS     = -L$(QTDIR)/lib -L../../src/.libs -L../../src $(KDELIBDIR)
+ CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+-POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
++POSTLIB  = $(KDEPOSTLIB) -lqt-mt -llprof -llcms -lm
+ BINDIR   = ../../
+ OBJECTS=main.o qtlcmswidgets.o qtscannerprofilerdialog.o qtscannerprofilerdialogbase.o moc_qtscannerprofilerdialog.o moc_qtscannerprofilerdialogbase.o moc_qtlcmswidgets.o
+ 
