@@ -81,7 +81,7 @@ qtScannerProfiler, qtMeasurementTool and qtProfileChecker.
 %description qt -l pl
 Oparte na Qt przyk³adowe narzêdzia do profilowania kolorów:
 qtMonitorProfiler, qtScannerProfiler, qtMeasurementTool i
-qtProfileChecker. 
+qtProfileChecker.
 
 %package kde
 Summary:	KDE-based sample colour profilers
@@ -97,7 +97,7 @@ kMeasurementTool and kProfileChecker.
 %description kde -l pl
 Oparte na KDE przyk³adowe narzêdzia do profilowania kolorów:
 kMonitorProfiler, kScannerProfiler, kMeasurementTool i
-kProfileChecker. 
+kProfileChecker.
 
 %prep
 %setup -q
