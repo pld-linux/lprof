@@ -6,7 +6,7 @@ Summary:	lprof - a colour profile construction set library
 Summary(pl):	lprof - biblioteka do konstruowania profili kolorów
 Name:		lprof
 Version:	1.09
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
@@ -37,7 +37,7 @@ tak¿e przyk³adowe programy do profilowania sprzêtu.
 Summary:	lprof header files and static library
 Summary(pl):	Pliki nag³ówkowe i statyczna biblioteka lprof
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for lprof - a colour profile construction set library.
@@ -49,7 +49,7 @@ Pliki nag³ówkowe lprof - biblioteki do konstruowania profili kolorów.
 Summary:	Static lprof library
 Summary(pl):	Statyczna biblioteka lprof
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static lprof library.
@@ -72,8 +72,8 @@ Dane urz±dzeñ do profilowania kolorów.
 Summary:	Qt-based sample colour profilers
 Summary(pl):	Oparte na Qt przyk³adowe narzêdzia do profilowania kolorów
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
-Requires:	%{name}-data = %{version}
+Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-data = %{version}-%{release}
 
 %description qt
 Qt-based sample colour profilers: qtMonitorProfiler,
@@ -88,8 +88,8 @@ qtProfileChecker.
 Summary:	KDE-based sample colour profilers
 Summary(pl):	Oparte na KDE przyk³adowe narzêdzia do profilowania kolorów
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
-Requires:	%{name}-data = %{version}
+Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-data = %{version}-%{release}
 
 %description kde
 KDE-based sample colour profilers: kMonitorProfiler, kScannerProfiler,
@@ -113,6 +113,7 @@ kProfileChecker.
 %{__make} all \
 	CC="%{__cc}" \
 	OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}" \
+	LIBDIR=%{_libdir} \
 	QTDIR=/usr
 
 %if %{with kde}
@@ -124,6 +125,7 @@ done
 %{__make} all \
 	CC="%{__cc}" \
 	OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}" \
+	LIBDIR=%{_libdir} \
 	QTDIR=/usr \
 	KDEDIR=/usr \
 	USE_KDE=y
@@ -134,7 +136,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/lprof}
 
 %{__make} install -C src \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	LIBDIR=$RPM_BUILD_ROOT%{_libdir}
 
 install icc2it8 qt[mps]* $RPM_BUILD_ROOT%{_bindir}
 
