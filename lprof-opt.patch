@@ -1,0 +1,64 @@
+--- lprof-1.09/ICCtoIT8/Makefile.orig	2002-06-18 15:33:32.000000000 +0200
++++ lprof-1.09/ICCtoIT8/Makefile	2003-07-01 20:32:49.000000000 +0200
+@@ -1,6 +1,6 @@
+ SHELL = /bin/sh
+ 
+-CFLAGS = -g -O4 -fomit-frame-pointer -Wall -I../include -I/usr/include -I/usr/local/include
++CFLAGS = $(OPTFLAGS) -Wall -I../include -I/usr/include -I/usr/local/include
+ BASEDIR = $(DESTDIR)/usr
+ BINDIR  = ..
+ 
+--- lprof-1.09/qt/qtMeasurementTool/makefile.orig	2002-06-25 16:42:07.000000000 +0200
++++ lprof-1.09/qt/qtMeasurementTool/makefile	2003-07-01 20:33:55.000000000 +0200
+@@ -19,7 +19,7 @@
+ # some settings
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt $(KDEINCLUDE)
+ LIBS     = -L$(QTDIR)/lib -L../../src $(KDELIBDIR)
+-CFLAGS   = -O4 -Wall $(KDEFLAGS)
++CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+ POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
+ 
+ BINDIR   = ../../
+--- lprof-1.09/qt/qtMonitorProfiler/Makefile.orig	2002-06-25 16:44:54.000000000 +0200
++++ lprof-1.09/qt/qtMonitorProfiler/Makefile	2003-07-01 20:34:07.000000000 +0200
+@@ -20,7 +20,7 @@
+ # some settings
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt  $(KDEINCLUDE)
+ LIBS     = -L$(QTDIR)/lib -L../../src $(KDELIBDIR)
+-CFLAGS   = -O4 -Wall $(KDEFLAGS)
++CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+ POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
+ BINDIR   = ../../
+ OBJECTS=main.o qtlcmswidgets.o qtmonitorprofilerdialog.o qtmonitorprofilerdialogbase.o moc_qtmonitorprofilerdialog.o moc_qtmonitorprofilerdialogbase.o moc_qtlcmswidgets.o
+--- lprof-1.09/qt/qtProfileChecker/makefile.orig	2002-06-19 20:59:40.000000000 +0200
++++ lprof-1.09/qt/qtProfileChecker/makefile	2003-07-01 20:34:28.000000000 +0200
+@@ -20,7 +20,7 @@
+ # some settings
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt  $(KDEINCLUDE)
+ LIBS     = -L$(QTDIR)/lib -L../../src $(KDELIBDIR)
+-CFLAGS   = -O4 -Wall $(KDEFLAGS)
++CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+ POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
+ BINDIR   = ../../
+ OBJECTS=main.o qtdrawcurve.o qtcietonge.o qtlcmswidgets.o qtprofilecheckerdialog.o qtprofilecheckerdialogbase.o moc_qtprofilecheckerdialog.o moc_qtprofilecheckerdialogbase.o moc_qtlcmswidgets.o
+--- lprof-1.09/qt/qtScannerProfiler/Makefile.orig	2002-06-25 16:46:03.000000000 +0200
++++ lprof-1.09/qt/qtScannerProfiler/Makefile	2003-07-01 20:34:42.000000000 +0200
+@@ -20,7 +20,7 @@
+ # some settings
+ INCLUDES = -I../../include -I$(QTDIR)/include -I. -I.. -I$(QTDIR)/include/qt  $(KDEINCLUDE)
+ LIBS     = -L$(QTDIR)/lib -L../../src $(KDELIBDIR)
+-CFLAGS   = -O4 -Wall $(KDEFLAGS)
++CFLAGS   = $(OPTFLAGS) -Wall $(KDEFLAGS)
+ POSTLIB  = $(KDEPOSTLIB) -lqt -llprof -llcms -lm
+ BINDIR   = ../../
+ OBJECTS=main.o qtlcmswidgets.o qtscannerprofilerdialog.o qtscannerprofilerdialogbase.o moc_qtscannerprofilerdialog.o moc_qtscannerprofilerdialogbase.o moc_qtlcmswidgets.o
+--- lprof-1.09/src/makefile.orig	2002-06-17 21:30:39.000000000 +0200
++++ lprof-1.09/src/makefile	2003-07-01 20:35:01.000000000 +0200
+@@ -1,6 +1,6 @@
+ SHELL = /bin/sh
+ 
+-CFLAGS  = -g -O4 -I../include -fomit-frame-pointer -Wall 
++CFLAGS  = $(OPTFLAGS) -I../include -Wall 
+ BASEDIR = $(DESTDIR)/usr
+ BINDIR  = $(BASEDIR)/bin
+ LIBDIR  = $(BASEDIR)/lib
