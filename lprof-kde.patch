@@ -1,0 +1,11 @@
+--- lprof-1.09/qt/qtProfileChecker/makefile.orig	Wed Jul  2 11:53:05 2003
++++ lprof-1.09/qt/qtProfileChecker/makefile	Wed Jul  2 12:18:10 2003
+@@ -12,7 +12,7 @@
+ KDEINCLUDE=-I/usr/include/kde -I/usr/local/kde1/include
+ KDELIBDIR=-L/usr/local/kde1/lib
+ KDEFLAGS=-DUSE_KDE
+-KDEPOSTLIB=-lkdeui -lkdecore -lkfile
++KDEPOSTLIB=-lkdeui -lkdecore -lkio
+ PROGRAM=kprofilechecker
+ endif
+ 
