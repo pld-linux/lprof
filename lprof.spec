@@ -3,7 +3,7 @@
 %bcond_without	kde	# without KDE version of utilities
 #
 Summary:	lprof - a colour profile construction set library
-Summary(pl):	lprof - biblioteka do konstruowania profili kolorów
+Summary(pl.UTF-8):   lprof - biblioteka do konstruowania profili kolorÃ³w
 Name:		lprof
 Version:	1.09
 Release:	3
@@ -29,48 +29,48 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 lprof is a colour profile construction set library. Package contains
 also sample profilers.
 
-%description -l pl
-lprof to biblioteka do konstruowania profili kolorów. Pakiet zawiera
-tak¿e przyk³adowe programy do profilowania sprzêtu.
+%description -l pl.UTF-8
+lprof to biblioteka do konstruowania profili kolorÃ³w. Pakiet zawiera
+takÅ¼e przykÅ‚adowe programy do profilowania sprzÄ™tu.
 
 %package devel
 Summary:	lprof header files and static library
-Summary(pl):	Pliki nag³ówkowe i statyczna biblioteka lprof
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe i statyczna biblioteka lprof
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for lprof - a colour profile construction set library.
 
-%description devel -l pl
-Pliki nag³ówkowe lprof - biblioteki do konstruowania profili kolorów.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe lprof - biblioteki do konstruowania profili kolorÃ³w.
 
 %package static
 Summary:	Static lprof library
-Summary(pl):	Statyczna biblioteka lprof
+Summary(pl.UTF-8):   Statyczna biblioteka lprof
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static lprof library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka lprof.
 
 %package data
 Summary:	Colour profiling targets data
-Summary(pl):	Dane urz±dzeñ do profilowania kolorów
+Summary(pl.UTF-8):   Dane urzÄ…dzeÅ„ do profilowania kolorÃ³w
 Group:		Libraries
 
 %description data
 Colour profiling targets data.
 
-%description data -l pl
-Dane urz±dzeñ do profilowania kolorów.
+%description data -l pl.UTF-8
+Dane urzÄ…dzeÅ„ do profilowania kolorÃ³w.
 
 %package qt
 Summary:	Qt-based sample colour profilers
-Summary(pl):	Oparte na Qt przyk³adowe narzêdzia do profilowania kolorów
+Summary(pl.UTF-8):   Oparte na Qt przykÅ‚adowe narzÄ™dzia do profilowania kolorÃ³w
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-data = %{version}-%{release}
@@ -79,14 +79,14 @@ Requires:	%{name}-data = %{version}-%{release}
 Qt-based sample colour profilers: qtMonitorProfiler,
 qtScannerProfiler, qtMeasurementTool and qtProfileChecker.
 
-%description qt -l pl
-Oparte na Qt przyk³adowe narzêdzia do profilowania kolorów:
+%description qt -l pl.UTF-8
+Oparte na Qt przykÅ‚adowe narzÄ™dzia do profilowania kolorÃ³w:
 qtMonitorProfiler, qtScannerProfiler, qtMeasurementTool i
 qtProfileChecker.
 
 %package kde
 Summary:	KDE-based sample colour profilers
-Summary(pl):	Oparte na KDE przyk³adowe narzêdzia do profilowania kolorów
+Summary(pl.UTF-8):   Oparte na KDE przykÅ‚adowe narzÄ™dzia do profilowania kolorÃ³w
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-data = %{version}-%{release}
@@ -95,8 +95,8 @@ Requires:	%{name}-data = %{version}-%{release}
 KDE-based sample colour profilers: kMonitorProfiler, kScannerProfiler,
 kMeasurementTool and kProfileChecker.
 
-%description kde -l pl
-Oparte na KDE przyk³adowe narzêdzia do profilowania kolorów:
+%description kde -l pl.UTF-8
+Oparte na KDE przykÅ‚adowe narzÄ™dzia do profilowania kolorÃ³w:
 kMonitorProfiler, kScannerProfiler, kMeasurementTool i
 kProfileChecker.
 
