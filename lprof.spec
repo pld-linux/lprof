@@ -3,7 +3,7 @@
 %bcond_without	kde	# without KDE version of utilities
 #
 Summary:	lprof - a colour profile construction set library
-Summary(pl.UTF-8):   lprof - biblioteka do konstruowania profili kolorów
+Summary(pl.UTF-8):	lprof - biblioteka do konstruowania profili kolorów
 Name:		lprof
 Version:	1.09
 Release:	3
@@ -35,7 +35,7 @@ także przykładowe programy do profilowania sprzętu.
 
 %package devel
 Summary:	lprof header files and static library
-Summary(pl.UTF-8):   Pliki nagłówkowe i statyczna biblioteka lprof
+Summary(pl.UTF-8):	Pliki nagłówkowe i statyczna biblioteka lprof
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -47,7 +47,7 @@ Pliki nagłówkowe lprof - biblioteki do konstruowania profili kolorów.
 
 %package static
 Summary:	Static lprof library
-Summary(pl.UTF-8):   Statyczna biblioteka lprof
+Summary(pl.UTF-8):	Statyczna biblioteka lprof
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -59,7 +59,7 @@ Statyczna biblioteka lprof.
 
 %package data
 Summary:	Colour profiling targets data
-Summary(pl.UTF-8):   Dane urządzeń do profilowania kolorów
+Summary(pl.UTF-8):	Dane urządzeń do profilowania kolorów
 Group:		Libraries
 
 %description data
@@ -70,7 +70,7 @@ Dane urządzeń do profilowania kolorów.
 
 %package qt
 Summary:	Qt-based sample colour profilers
-Summary(pl.UTF-8):   Oparte na Qt przykładowe narzędzia do profilowania kolorów
+Summary(pl.UTF-8):	Oparte na Qt przykładowe narzędzia do profilowania kolorów
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-data = %{version}-%{release}
@@ -86,7 +86,7 @@ qtProfileChecker.
 
 %package kde
 Summary:	KDE-based sample colour profilers
-Summary(pl.UTF-8):   Oparte na KDE przykładowe narzędzia do profilowania kolorów
+Summary(pl.UTF-8):	Oparte na KDE przykładowe narzędzia do profilowania kolorów
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-data = %{version}-%{release}
