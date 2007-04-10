@@ -22,7 +22,7 @@ URL:		http://www.littlecms.com/profilers.htm
 %{?with_kde:BuildRequires:	kdelibs-devel >= 3.0}
 BuildRequires:	lcms-devel >= 1.09
 BuildRequires:	libtool
-BuildRequires:	qt-devel >= 3.0
+BuildRequires:	qt-devel >= 1:3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
