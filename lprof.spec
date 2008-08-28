@@ -5,12 +5,13 @@
 Summary:	lprof - a colour profile construction set library
 Summary(pl.UTF-8):	lprof - biblioteka do konstruowania profili kolorów
 Name:		lprof
+# Available version:	1.11.4.1
 Version:	1.09
-Release:	3
+Release:	3.1
 License:	GPL
 Group:		X11/Applications/Graphics
-Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
-# Source0-md5:	731d934d2e8b6dda2e453e4b1d2be8f4
+Source0:	http://dl.sourceforge.net/lprof/%{name}-%{version}.tar.gz
+# Source0-md5:	2177c77c24aa10db9b7681d264735ea9
 Patch0:		%{name}-opt.patch
 # based on http://www.littlecms.com/lprof-1.09_mrr_patch4
 Patch1:		%{name}-mrr.patch
@@ -18,7 +19,7 @@ Patch2:		%{name}-targetsdir.patch
 Patch3:		%{name}-shared.patch
 Patch4:		%{name}-kde.patch
 Patch5:		%{name}-qtmt.patch
-URL:		http://www.littlecms.com/profilers.htm
+URL:		http://lprof.sourceforge.net/
 %{?with_kde:BuildRequires:	kdelibs-devel >= 3.0}
 BuildRequires:	lcms-devel >= 1.09
 BuildRequires:	libtool
